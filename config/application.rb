@@ -24,7 +24,7 @@ module Example
 
     Rails.application.config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
+        origins 'https://scarreno-eval-prod.apigee.net/hackeadito'
         resource '*', headers: :any, methods: [:get, :post, :patch, :put]
       end
     end

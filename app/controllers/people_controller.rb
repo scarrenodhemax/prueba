@@ -10,7 +10,11 @@ class PeopleController < ApplicationController
 
   # GET /people/1
   def show
-    render json: @person
+    if @person
+      render json: @person
+    else
+      render status: :not_found
+    end
   end
 
   # POST /people
@@ -29,10 +33,14 @@ class PeopleController < ApplicationController
 
   # PATCH/PUT /people/1
   def update
-    if @person.update(person_params)
-      render json: @person
+    if request.content_type == "application/json"
+      if @person.update(person_params)
+        render json: @person
+      else
+        render json: @person.errors, status: :not_found
+      end
     else
-      render json: @person.errors, status: :unprocessable_entity
+      render status: :bad_request
     end
   end
 
@@ -49,7 +57,11 @@ class PeopleController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
-      @person = Person.find_by(nationalId: params[:nationalId])
+      if @person = Person.find_by(nationalId: params[:nationalId])
+        @person
+      else
+        render status: :not_found
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

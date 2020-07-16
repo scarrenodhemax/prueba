@@ -37,10 +37,22 @@ COPY Gemfile Gemfile.lock ./
 # Install dependencies
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle check || bundle install
+# Copy all file from app to root
 COPY . ./ 
-# Set privilege to run script, this script remove 
+# Set privilege to run script, this script remove any rails process if this exist, just for precaution
 RUN ["chmod", "+x","./entrypoints/docker-entrypoint.sh"]
 # Run script
 ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]
+# set rails to production
+ENV RAILS_ENV=production
+# Never set this variable in real life, only if you wanna drop you database
+ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+# Create database if it dosen't exist
+RUN ["rails", "db:create"]
+# Charge the database schema if it doesn't exist
+RUN ["rails", "db:schema:load"]
+# drop database, just for this example
+RUN ["rails", "db:reset"]
+# RUN ["rails", "db:create", "db:schema:load", "db:reset"]
 # Start the main process in production.
-CMD ["rails", "server", "-b", "0.0.0.0", "-e", "production"]
+CMD ["rails", "server", "-b", "0.0.0.0"]
