@@ -43,4 +43,4 @@ RUN ["chmod", "+x","./entrypoints/docker-entrypoint.sh"]
 # Run script
 ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]
 # Start the main process in production.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-e", "production"]
