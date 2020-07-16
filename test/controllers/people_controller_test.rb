@@ -34,7 +34,7 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
 
   test "POST /people + json should return status 400 on validation error or when “Content-Type” header is not set as “application/json”" do
     post people_url, headers: { 'Content-Type' => 'text/plain' }, params: { person: { age: @person.age, lastName: @person.lastName, name: @person.name, nationalId: @person.nationalId, originPlanet: @person.originPlanet, pictureUrl: @person.pictureUrl } }, as: :json
-    assert_response :ok
+    assert_response :bad_request
     post people_url
     assert_response :bad_request
   end
