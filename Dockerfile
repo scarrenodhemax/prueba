@@ -48,9 +48,9 @@ ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]
 # Never set this variable in real life, only if you wanna drop you database
 ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 # Create database if it dosen't exist
-RUN ["rails", "db:create"]
+# RUN ["rails", "db:create"]
 # Charge the database schema if it doesn't exist
-RUN ["rails", "db:schema:load"]
+# RUN ["rails", "db:schema:load"]
 # drop database, just for this example
 # RUN ["rails", "db:reset"]
 RUN ["rails", "test"]
