@@ -18,8 +18,8 @@ default: &default
   adapter: postgresql
   host: 35.188.75.134
   encoding: unicode
-  username: postgres
-  password: asvJFLktUTv4cAh9
+  username: <%= ENV.fetch("DB_USERNAME") %>
+  password: <%= ENV.fetch("DB_PASSWORD") %>
   database: db_people
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling

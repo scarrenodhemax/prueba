@@ -46,13 +46,13 @@ ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]
 # set rails to production
 ENV RAILS_ENV=production
 # Never set this variable in real life, only if you wanna drop you database
-ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+# ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 # Create database if it dosen't exist
 RUN ["rails", "db:create"]
 # Charge the database schema if it doesn't exist
 RUN ["rails", "db:schema:load"]
 # drop database, just for this example
-RUN ["rails", "db:reset"]
-# RUN ["rails", "db:create", "db:schema:load", "db:reset"]
+# RUN ["rails", "db:reset"]
+RUN ["rails", "test"]
 # Start the main process in production.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-e", "production"]
