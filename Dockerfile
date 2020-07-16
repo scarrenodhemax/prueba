@@ -53,6 +53,10 @@ ENV DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 # RUN ["rails", "db:schema:load"]
 # drop database, just for this example
 # RUN ["rails", "db:reset"]
+ENV DB_USERNAME=secret
+ENV DB_PASSWORD=secret
+ENV TEST_USERNAME=postgres
+ENV TEST_PASSWORD=asvJFLktUTv4cAh9
 RUN ["rails", "test"]
 ENV RAILS_ENV=production
 # Start the main process in production.

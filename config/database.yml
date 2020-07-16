@@ -61,6 +61,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  username: <%= ENV.fetch("TEST_USERNAME") %>
+  password: <%= ENV.fetch("TEST_PASSWORD") %>
   database: test_people
 
 # As with config/secrets.yml, you never want to store sensitive information,
